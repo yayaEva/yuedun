@@ -1,0 +1,23 @@
+@import '~themes/vars.less';
+
+.contentInner {
+  box-shadow: @shadow-1;
+  min-height: ~'calc(100vh - 230px)';
+  position: relative;
+
+  &Padding {
+    background: #fff;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contentInner {
+    min-height: ~'calc(100vh - 160px)';
+
+    &Padding {
+      background: #fff;
+      padding: 12px;
+    }
+  }
+}

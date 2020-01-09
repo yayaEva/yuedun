@@ -1,0 +1,6 @@
+{
+  "name": "TableFinder",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableFinder.js"
+}

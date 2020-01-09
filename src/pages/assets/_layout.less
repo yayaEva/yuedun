@@ -1,0 +1,35 @@
+.wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background-color: #808487;
+	padding-left: 10px;
+	:global {
+		.ant-tabs.ant-tabs-card .ant-tabs-card-bar {
+			.ant-tabs-nav-container {
+				height: 34px;
+				border-top: 4px solid #808487;
+			}
+			.ant-tabs-tab {
+				height: 30px;
+				line-height: 28px;
+				border: none;
+				border-radius: 0;
+				margin-right: 0;
+				font-size: 12px;
+				font-weight: normal;
+				color: #4d4d4d;
+				background-color: #808487;
+				&.ant-tabs-tab-active {
+					height: 30px;
+					background-color: #fff;
+				}
+			}
+		}
+	}
+}
+
+.inner {
+	margin-top: 30px;
+}

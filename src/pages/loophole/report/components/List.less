@@ -1,0 +1,19 @@
+.table {
+  :global {
+    .ant-table td {
+      white-space: nowrap;
+    }
+  }
+}
+
+.download {
+  position: relative;
+  > span {
+    cursor: pointer;
+    padding: 0 6px;
+    border-right: 1px solid #ddd;
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

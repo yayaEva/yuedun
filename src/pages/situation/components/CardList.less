@@ -1,0 +1,140 @@
+.card {
+	position: relative;
+	z-index: 3;
+  /*height: 200px;*/
+  max-width: 100%;
+	/*max-width: 330px;*/
+	/*background-color: #0f110f;*/
+	padding: 9px 20px 18px 30px;
+	background-image: url(../../../assets/box_bg1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	:global {
+		.ant-progress-inner {
+			background-color: #185659;
+		}
+	}
+
+	.low {
+		position: absolute;
+		left: 22%;
+		top: 50%;
+		margin-top: -10px;
+		color: #fff;
+    font-size: 13px;
+	}
+
+	.middle {
+		position: absolute;
+		left: 50%;
+		top: 8px;
+		color: #fff;
+    font-size: 13px;
+	}
+
+	.high {
+		position: absolute;
+		right: 22%;
+		top: 50%;
+		margin-top: -10px;
+		color: #fff;
+    font-size: 13px;
+	}
+}
+
+.echarts {
+  height: 200px !important;
+  &.gaugeChart {
+  	width: 200px !important;
+  	margin: 0 auto;
+  }
+  &-map {
+    width: 120%;
+    margin-left: -10%;
+    height: 400px !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .echarts {
+    height: 182px !important;
+    &.gaugeChart {
+      width: 182px !important;
+      margin: 0 auto;
+  	}
+    &-map {
+      height: 362px !important;
+    }
+  }
+}
+
+.title {
+	font-size: 16px;
+	color: #42dda9;
+	font-weight: 500;
+	margin-bottom: 8px;
+	display: flex;
+	justify-content: center;
+	margin-right: 80px;
+
+	> div {
+		flex: 2;
+		text-align: center;
+		&:last-child {
+			flex: 1;
+		}
+	}
+}
+
+.progress {
+	color: #fff;
+	line-height: 1;
+	:global {
+		.ant-progress {
+			font-size: 0;
+		}
+	}
+}
+
+.progressHeader {
+	line-height: 1;
+	margin-top: 6px;
+	margin-bottom: 1px;
+	padding-left: 8px;
+}
+
+.marks {
+	position: absolute;
+	right: -20px;
+	top: 22%;
+	width: 176px;
+	transform: scale(.833333);
+
+	.icon {
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background-color: #6b0648;
+		margin-right: 6px;
+    margin-bottom: 3px;
+		vertical-align: -2px;
+	}
+	.label {
+		display: inline-block;
+		font-size: 12px;
+		line-height: 12px;
+		color: #c2c6c2;
+    margin-bottom: 3px;
+	}
+}
+
+/*.map {
+	position: absolute;
+	left: -10%;
+	top: -20px;
+	right: -10%;
+	z-index: 2;
+	background-color: #000;
+}*/

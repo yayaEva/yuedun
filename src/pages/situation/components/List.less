@@ -1,0 +1,98 @@
+.table {
+  background-color: #0f110f;
+  :global {
+  	.ant-table {
+      position: relative;
+      z-index: 3;
+  		height: 200px;
+  		overflow: hidden;
+  		font-size: 12px;
+  		color: #fff;
+      background-color: transparent;
+      background-image: url(../../../assets/box_bg2_center.png);
+      background-repeat: repeat;
+      background-position: center center;
+      background-size: contain;
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        width: 12px;
+        height: 100%;
+        background-color: #0f110f;
+        background-image: url(../../../assets/box_bg2_start.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: contain;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        width: 72px;
+        height: 100%;
+        background-color: #0f110f;
+        background-image: url(../../../assets/box_bg2_end.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: contain;
+      }
+  	}
+  	.ant-table-thead > tr > th {
+      position: relative;
+      z-index: 3;
+      text-align: left;
+  		background-color: transparent !important;
+  		font-size: 14px;
+  		color: #42dda9;
+  		border-bottom: none;
+  		padding-top: 12px !important;
+  		padding-bottom: 2px !important;
+      padding-left: 16px !important;
+      padding-right: 0 !important;
+  	}
+  	.ant-table-tbody > tr > td {
+      position: relative;
+      z-index: 3;
+      text-align: left;
+  		padding-top: 4px !important;
+  		padding-bottom: 4px !important;
+      padding-left: 16px !important;
+      padding-right: 0 !important;
+  		border-bottom: none;
+  		&:after {
+	  		display: none;
+	  	}
+  	}
+  	.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+  		background-color: transparent !important;
+  	}
+    .ant-table td {
+      white-space: nowrap;
+    }
+    .ant-empty-normal {
+    	color: #fff;
+    }
+    .ant-table-placeholder {
+    	background-color: transparent !important;
+    	border: none;
+    	border-radius: none;
+    }
+  }
+}
+
+/*@media (min-width: 1920px) {
+  .table {
+    :global {
+      .ant-table {
+        height: 182px;
+      }
+    }
+  }
+}
+*/

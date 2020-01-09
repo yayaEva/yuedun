@@ -1,0 +1,6 @@
+{
+  "name": "Operation",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Operation.js"
+}

@@ -1,0 +1,65 @@
+.header {
+	width: 100%;
+	height: 47px;
+	background-color: #000;
+	background-image: url(../../../assets/top_bg.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	margin-bottom: 32px;
+}
+
+@media (min-width: 1280px) {
+	.header {
+		height: 40px;
+		margin-bottom: 20px;
+	}
+}
+
+.home {
+	/*padding-top: 8px;*/
+	padding-left: 16px;
+}
+
+.select {
+	font-size: 12px;
+	color: #33cc99;
+	padding-left: 15px;
+	:global {
+		.ant-select {
+			font-size: 12px;
+			line-height: 24px;
+			color: #33cc99;
+			margin-left: 8px;
+		}
+		.ant-select-selection {
+			border-color: #0c3b3f;
+			background-color: transparent;
+			/*border-radius: 0;*/
+			height: 24px;
+		}
+		.ant-select-selection__rendered {
+			line-height: 24px;
+		}
+		.ant-select-arrow {
+			color: #0c3b3f;
+		}
+	}
+}
+
+.title {
+	font-size: 15px;
+	line-height: 40px;
+	font-weight: 500;
+	color: #477879;
+	text-align: center;
+	padding: 0 10px;
+}
+
+.time {
+	padding-top: 8px;
+	font-size: 14px;
+	color: #42dda9;
+	text-align: right;
+	padding-right: 36px;
+}
