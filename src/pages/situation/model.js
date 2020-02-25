@@ -7,9 +7,10 @@ import store from 'store'
 const {
   queryUserList,
   totalEvent,
-  listEvent,
+  queryBytime,
   srcipEvent,
   dstipEvent,
+  typeEvent,
 } = api
 
 export default modelExtend(pageModel, {
@@ -19,13 +20,16 @@ export default modelExtend(pageModel, {
     totalEvent: {
       list: [],
     },
-    listEvent: {
+    queryBytime: {
       list: [],
     },
     srcipEvent: {
       list: [],
     },
     dstipEvent: {
+      list: [],
+    },
+    typeEvent: {
       list: [],
     },
     mapType: store.get('mapType') || 'world',
@@ -41,9 +45,10 @@ export default modelExtend(pageModel, {
             payload,
           })
           dispatch({ type: 'totalEvent' })
-          dispatch({ type: 'listEvent' })
+          dispatch({ type: 'queryBytime' })
           dispatch({ type: 'srcipEvent' })
           dispatch({ type: 'dstipEvent' })
+          dispatch({ type: 'typeEvent' })
         }
       })
     },
@@ -78,13 +83,13 @@ export default modelExtend(pageModel, {
         })
       }
     },
-    *listEvent({ payload = {} }, { call, put }) {
-      const data = yield call(listEvent, payload)
+    *queryBytime({ payload = {} }, { call, put }) {
+      const data = yield call(queryBytime, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
           payload: {
-            $$type: 'listEvent',
+            $$type: 'queryBytime',
             list: data.data,
           },
         })
@@ -111,6 +116,19 @@ export default modelExtend(pageModel, {
           type: 'querySuccess',
           payload: {
             $$type: 'srcipEvent',
+            list: data.data,
+          },
+        })
+      }
+    },
+    //类型
+    *typeEvent({ payload = {} }, { call, put }) {
+      const data = yield call(typeEvent, payload)
+      if (data) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            $$type: 'typeEvent',
             list: data.data,
           },
         })

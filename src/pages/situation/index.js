@@ -146,12 +146,27 @@ class Index extends PureComponent {
     }
   }
 
+  // get radialChartProps() {
+  //   return {
+  //     data: [{ name: 'DDOS攻击', value: 90 }, { name: '漏洞利用', value: 80 }, { name: '网站后门', value: 70 }, { name: '僵尸网络', value: 60 }, { name: '远程控制', value: 50 }],
+  //     color: ['#f74d83', '#0c5ded', '#eeff00', '#804722', '#e94f46'],
+  //   }
+  // }
   get radialChartProps() {
+    const { dispatch, situation, loading } = this.props
+    const { list = [] } = situation.typeEvent
+    const threat_type = list.map((v) => ({ name: v.eventtype,value: v.num }))
+
     return {
-      data: [{ name: 'DDOS攻击', value: 90 }, { name: '漏洞利用', value: 80 }, { name: '网站后门', value: 70 }, { name: '僵尸网络', value: 60 }, { name: '远程控制', value: 50 }],
+      data: threat_type,
       color: ['#f74d83', '#0c5ded', '#eeff00', '#804722', '#e94f46'],
+      // onFilterChange: value => {
+      //   console.log('onFilterChange', value)
+      // },
     }
   }
+
+
 
   get targetProps() {
     const { dispatch,situation, loading } = this.props
@@ -185,28 +200,6 @@ class Index extends PureComponent {
     }
   }
 
-  // get cardListProps() {
-  //   const { dispatch, dashboard, loading } = this.props
-  //   const sourceSum = sum(dashboard.srcipEvent.list)
-  //   const source = dashboard.srcipEvent.list.map((v) => ({
-  //     title: v.srcip,
-  //     value: String(v.num),
-  //     percent: v.num / sourceSum * 100, // 计算比例，乘以 100
-  //   }))
-  //   const target = dashboard.dstipEvent.list.map((v) => ({
-  //     title: v.dstip,
-  //     value: String(v.num),
-  //     percent: v.num / sourceSum * 100, // 计算比例，乘以 100
-  //   }))
-
-  //   return {
-  //     source,
-  //     target,
-  //     loading: loading.effects['dashboard/srcipEvent'] || loading.effects['dashboard/dstipEvent'],
-  //   }
-  // }
-
-
   // get listProps() {
   //   const { dispatch, situation, loading } = this.props
   //   const { list } = situation
@@ -225,14 +218,14 @@ class Index extends PureComponent {
 
   get listProps() {
     const { dispatch, situation, loading } = this.props
-    const { list = [] } = situation.listEvent
+    const { list = [] } = situation.queryBytime
 
     return {
       dataSource: list,
       color: ['#fbb03b', '#ff0000', '#ff0000', '#00ff00', '#fbb03b', '#ff0000'],
       pagination: false,
       bordered: false,
-      loading: loading.effects['dashboard/listEvent'],
+      loading: loading.effects['situation/queryBytime'],
       onEditItem(item) {
         console.log('onEditItem', item)
       },

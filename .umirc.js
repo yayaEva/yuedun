@@ -112,7 +112,7 @@ export default {
         devServer: {
           proxy: {
             '/api': {
-              'target': 'http://47.92.131.30:8001',
+              'target': 'http://localhost:8001',
               'changeOrigin': true,
               'pathRewrite': { '^/api' : '' }
             }

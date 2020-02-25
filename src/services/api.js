@@ -19,10 +19,11 @@ export default {
 
   queryDashboard: '/dashboard',
 
-  // dashboard
+  // dashboard 事件
   totalEvent: '/totalEvent', // 事件总数
   typeEvent: '/typeEvent', // 威胁类型
   srcipEvent: '/srcipEvent', // 事件源地址TOP5
   dstipEvent: '/dstipEvent', // 事件目标地址TOP5
   listEvent: '/listEvent', // 最新事件
+  queryBytime:'/queryBytime',//全屏监控list
 }

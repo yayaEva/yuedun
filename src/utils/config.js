@@ -2,7 +2,7 @@ module.exports = {
   siteName: '岳盾—网络安全动态感知平台',
   copyright: 'Yue Dun ©2019',
   logoPath: '/logo/logo@128.png',
-  apiPrefix: '/api',
+  apiPrefix: 'http://10.10.40.103:8001',
   // apiPrefix: './__mock__',
   fixedHeader: true, // sticky primary layout header
 
