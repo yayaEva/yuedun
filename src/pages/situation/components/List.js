@@ -45,7 +45,11 @@ class List extends PureComponent {
         dataIndex: 'level',
         key: 'level',
         width: 'auto',
-        render: renderEl,
+        render: (text,record,index)=>renderEl(
+          text == '1' ? <span>{'低危'}</span> : (text == '2' ? <span>{'中危'}</span>:<span>{'高危'}</span>),
+          record,
+          index
+        ),
       },
       {
         title: <Trans>事件类型</Trans>,

@@ -38,7 +38,16 @@ class List extends PureComponent {
         title: <Trans>等级</Trans>,
         dataIndex: 'level',
         key: 'level',
-        render: (text) => text === '3' ? <span style={{ color: '#ed5565' }}>{text}</span> : text
+        // render: (text) => text == '3' ? <span style={{ color: '#ed5565' }}>{text}</span> : text
+        render:(text)=> {
+            if (text == '3') {
+              return <span style={{ color: '#ed5565' }}>{'高危'}</span>
+            }else if(text == '2'){
+              return <span>{'中危'}</span>
+            }else{
+              return <span>{'低危'}</span>
+            }
+        }
       },
       {
         title: <Trans>事件名称</Trans>,
