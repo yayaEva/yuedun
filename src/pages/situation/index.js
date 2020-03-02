@@ -170,7 +170,7 @@ class Index extends PureComponent {
 
   get targetProps() {
     const { dispatch,situation, loading } = this.props
-    const sourceSum = sum(situation.srcipEvent.list)
+    const sourceSum = sum(situation.dstipEvent.list)
     const target = situation.dstipEvent.list.map((v) => ({
       title: v.dstip,
       value: String(v.num),
@@ -180,6 +180,7 @@ class Index extends PureComponent {
     return {
       title: '事件目标IP',
       dataSource: target,
+      color:['#ff0000','#fbb03b','#fcee21','#349e9c','#42dda9'],
       loading: loading.effects['situation/dstipEvent'],
     }
   }
@@ -196,6 +197,7 @@ class Index extends PureComponent {
     return {
       title: '事件源目标IP',
       dataSource: source,
+      color:['#ff0000','#fbb03b','#fcee21','#349e9c','#42dda9'],
       loading: loading.effects['situation/srcipEvent'],
     }
   }

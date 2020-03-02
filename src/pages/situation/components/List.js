@@ -9,7 +9,10 @@ import styles from './List.less'
 class List extends PureComponent {
   render() {
     const { onEditItem, color = [], i18n, ...tableProps } = this.props
-    const renderEl = (text, record, index) => <span style={{ color: color[index] }}>{text}</span>
+    //  const renderEl = (text, record, index) => <span style={{ color: color[index] }}>{text}</span>
+    const renderEl=(text,record,index)=>
+      record.level == '1' ? <span style={{ color: color[3] }}>{text}</span> : (record.level == '2' ? <span style={{ color: color[4] }}>{text}</span>:<span style={{ color: color[2] }}>{text}</span>)
+    
 
     const columns = [
       {
