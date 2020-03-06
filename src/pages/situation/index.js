@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { withI18n } from '@lingui/react'
-import { Row, Col } from 'antd'
+import {Button, Row, Col } from 'antd'
 import store from 'store'
 import { Page } from 'components'
 import Header from './components/Header'
@@ -102,8 +102,12 @@ const completed = [{
   '接口号2': 276
 }]
 
+let scrollInterval='';
+
 @withI18n()
 @connect(({ situation, loading }) => ({ situation, loading }))
+
+
 class Index extends PureComponent {
   get headerProps() {
     const { dispatch, situation } = this.props
@@ -221,7 +225,6 @@ class Index extends PureComponent {
   get listProps() {
     const { dispatch, situation, loading } = this.props
     const { list = [] } = situation.queryBytime
-
     return {
       dataSource: list,
       color: ['#fbb03b', '#ff0000', '#ff0000', '#00ff00', '#fbb03b', '#ff0000'],
@@ -232,6 +235,41 @@ class Index extends PureComponent {
         console.log('onEditItem', item)
       },
     }
+  }
+
+   
+  state = {
+    // data: this.listProps.dataSource,
+    listMarginTop:"0",
+    animate:false,
+  }
+
+  scrollUp= e =>{
+    console.log(this.listProps.dataSource[0])
+    this.listProps.dataSource.push(this.listProps.dataSource[0]);
+    // let height=document.getElementById("scrollList").getElementsByTagName("li")[0].scrollHeight+1;
+    this.setState({ 
+      animate: true,
+      listMarginTop: "-39px",
+    }); 
+    setTimeout(() => { 
+      this.listProps.dataSource.shift();    
+      this.setState({ 
+        animate: false,
+        listMarginTop: "0",
+      }); 
+      this.forceUpdate();
+    }, 2000)
+  }
+ 
+  startScrollUp= e =>{
+    this.endScroll();
+    this.scrollUp();
+    scrollInterval=setInterval(this.scrollUp, 3000);
+  }
+
+  endScroll= e =>{
+    clearInterval(scrollInterval);
   }
 
   get numberCardsProps() {
@@ -281,8 +319,11 @@ class Index extends PureComponent {
         </Row>
         <Row>
           <Col xl={6} lg={6}><CardList {...this.targetProps} /></Col>
-          <Col xl={12} lg={12}><List {...this.listProps} /></Col>
+          <Col xl={12} lg={12}><List itemLayout="horizontal" id="scrollList" style={{marginTop:this.state.listMarginTop}} className={this.state.animate ? "animate" : ''} {...this.listProps} /></Col>
           <Col xl={6} lg={6}><CardList {...this.sourceProps} /></Col>
+        </Row>
+        <Row>
+          <Col xl={6} lg={6}>  <Button type="primary" onClick={this.startScrollUp}>向上滚动</Button></Col>
         </Row>
       </Page>
     )
