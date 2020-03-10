@@ -4,6 +4,7 @@ import api from 'api'
 import { pageModel } from 'utils/model'
 
 const {
+  typeEvent,
   queryUserList,
   createUser,
   removeUser,
@@ -15,6 +16,9 @@ export default modelExtend(pageModel, {
   namespace: 'event',
 
   state: {
+    typeEvent: {
+      list: [],
+    },
     currentItem: {},
     modalVisible: false,
     modalType: 'create',
@@ -30,12 +34,25 @@ export default modelExtend(pageModel, {
             type: 'query',
             payload,
           })
+          dispatch({ type: 'typeEvent' })
         }
       })
     },
   },
 
   effects: {
+    *typeEvent({ payload = {} }, { call, put }) {
+      const data = yield call(typeEvent, payload)
+      if (data) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            $$type: 'typeEvent',
+            list: data.data,
+          },
+        })
+      }
+    },
     *query({ payload = {} }, { call, put }) {
       const data = yield call(queryUserList, payload)
       if (data) {

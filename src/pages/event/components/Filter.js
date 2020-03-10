@@ -6,6 +6,7 @@ import { FilterItem, SearchView, AsyncSelect, Button } from 'components'
 import { Trans, withI18n } from '@lingui/react'
 import { Form, Row, Col, Input, Icon, DatePicker } from 'antd'
 import { LEVELS, EVENT_TYPES } from 'utils/constant'
+import { connect } from 'dva'
 
 const { RangePicker } = DatePicker
 
@@ -27,13 +28,35 @@ const TwoColProps = {
   xl: 24,
 }
 
+// const type = [{
+//   value: '远程控制',
+//   label: '远程控制'
+// }]
+
 @withI18n()
 @Form.create()
 @SearchView
+@connect(({ event, loading }) => ({ event, loading }))
 class Filter extends Component {
   state = {
     expandForm: false,
   }
+
+  get eventType() {
+    const { dispatch, event, loading } = this.props
+    const { list = [] } = event.typeEvent
+    const threat_type = list.map((v) => ({ value: v.eventtype, label: v.eventtype }))
+    // console.log(threat_type)
+    return {
+      // data: {
+        threat_type, // 威胁类型
+      // },
+      // onFilterChange: value => {
+      //   console.log('onFilterChange', value)
+      // },
+    }
+  }
+  
 
   handleFields = fields => {
     const { createTime } = fields
@@ -117,7 +140,8 @@ class Filter extends Component {
         <Col {...ColProps}>
           <FilterItem label={i18n.t`事件类型`}>
             {getFieldDecorator('type', { initialValue: filter.type })(
-              <AsyncSelect defaultOptions={[{ value: '', label: '全部' }, ...EVENT_TYPES]} placeholder={i18n.t`请选择`} width="100%" />
+              // <AsyncSelect defaultOptions={[{ value: '', label: '全部' },...EVENT_TYPES]} placeholder={i18n.t`请选择`} width="100%" />
+              <AsyncSelect defaultOptions={this.eventType.threat_type} placeholder={i18n.t`请选择`} width="100%" />
             )}
           </FilterItem>
         </Col>
@@ -172,7 +196,8 @@ class Filter extends Component {
         <Col {...ColProps}>
           <FilterItem label={i18n.t`事件类型`}>
             {getFieldDecorator('type', { initialValue: filter.type })(
-              <AsyncSelect defaultOptions={[{ value: '', label: '全部' }, ...EVENT_TYPES]} placeholder={i18n.t`请选择`} width="100%" />
+              // <AsyncSelect defaultOptions={[{ value: '', label: '全部' }, ...EVENT_TYPES]} placeholder={i18n.t`请选择`} width="100%" />
+              <AsyncSelect defaultOptions={this.eventType.threat_type} placeholder={i18n.t`请选择`} width="100%" />
             )}
           </FilterItem>
         </Col>

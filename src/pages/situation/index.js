@@ -239,33 +239,41 @@ class Index extends PureComponent {
 
    
   state = {
-    // data: this.listProps.dataSource,
+    // data: [],
     listMarginTop:"0",
     animate:false,
   }
 
-  scrollUp= e =>{
-    console.log(this.listProps.dataSource[0])
-    this.listProps.dataSource.push(this.listProps.dataSource[0]);
-    // let height=document.getElementById("scrollList").getElementsByTagName("li")[0].scrollHeight+1;
+  scrollDown= e =>{
+    // console.log(this.state.data)
+    // let ulNode=document.getElementById("scrollList").getElementsByTagName("tbody")[0];
+    // ulNode.firstChild.classList.remove("opacityAnimation");
     this.setState({ 
-      animate: true,
-      listMarginTop: "-39px",
+      animate: true ,
+      listMarginTop: "24px"
     }); 
     setTimeout(() => { 
-      this.listProps.dataSource.shift();    
+      this.listProps.dataSource.unshift(this.listProps.dataSource[this.listProps.dataSource.length-1]);
+      // ulNode.firstChild.classList.add("opacityAnimation");
+      this.listProps.dataSource.pop();    
       this.setState({ 
-        animate: false,
+        animate: false, 
         listMarginTop: "0",
       }); 
       this.forceUpdate();
-    }, 2000)
+    }, 1000)
   }
  
-  startScrollUp= e =>{
+  // startScrollDown= e =>{
+  //   this.endScroll();
+  //   this.scrollDown();
+  //   scrollInterval=setInterval(this.scrollDown, 2000);
+  // }
+
+  componentDidMount= e =>{
     this.endScroll();
-    this.scrollUp();
-    scrollInterval=setInterval(this.scrollUp, 3000);
+    this.scrollDown();
+    scrollInterval=setInterval(this.scrollDown, 2000);
   }
 
   endScroll= e =>{
@@ -319,12 +327,12 @@ class Index extends PureComponent {
         </Row>
         <Row>
           <Col xl={6} lg={6}><CardList {...this.targetProps} /></Col>
-          <Col xl={12} lg={12}><List itemLayout="horizontal" id="scrollList" style={{marginTop:this.state.listMarginTop}} className={this.state.animate ? "animate" : ''} {...this.listProps} /></Col>
+          <Col xl={12} lg={12} ><List itemLayout="horizontal"  id="scrollList"  className={this.state.animate ? "animate" : ''} {...this.listProps} /></Col>
           <Col xl={6} lg={6}><CardList {...this.sourceProps} /></Col>
         </Row>
-        <Row>
-          <Col xl={6} lg={6}>  <Button type="primary" onClick={this.startScrollUp}>向上滚动</Button></Col>
-        </Row>
+        {/* <Row>
+          <Col xl={6} lg={6}><Button type="primary" onClick={this.startScrollDown}>向下滚动</Button></Col>
+        </Row> */}
       </Page>
     )
   }
