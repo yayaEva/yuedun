@@ -25,53 +25,53 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, onViewItem, i18n, ...tableProps } = this.props
+    const { onDeleteItem, onEditItem, onViewItem ,onChange, i18n, ...tableProps } = this.props
 
     const columns = [
       {
         title: <Trans>时间</Trans>,
-        dataIndex: 'createTime',
-        key: 'createTime',
+        dataIndex: 'time',
+        key: 'time',
         fixed: 'left',
       },
       {
         title: <Trans>等级</Trans>,
         dataIndex: 'level',
         key: 'level',
-        render: (text) => text === '高危' ? <span style={{ color: '#ed5565' }}>{text}</span> : text
+        render: (text) => text == '3' ? <span style={{ color: '#ed5565' }}>{'高危'}</span> : (text == '2' ? <span>{'中危'}</span>:<span>{'低危'}</span>),
       },
       {
         title: <Trans>事件名称</Trans>,
-        dataIndex: 'eventName',
-        key: 'eventName',
+        dataIndex: 'eventname',
+        key: 'eventname',
       },
       {
         title: <Trans>事件类型</Trans>,
-        dataIndex: 'eventType',
-        key: 'eventType',
+        dataIndex: 'eventtype',
+        key: 'eventtype',
       },
       {
         title: <Trans>源IP</Trans>,
-        dataIndex: 'sourceIp',
-        key: 'sourceIp',
+        dataIndex: 'srcip',
+        key: 'srcip',
         render: (text) => <Text data={text} />
       },
       {
         title: <Trans>目标IP</Trans>,
-        dataIndex: 'targetIp',
-        key: 'targetIp',
+        dataIndex: 'dstip',
+        key: 'dstip',
         render: (text) => <Text data={text} />
       },
       {
         title: <Trans>威胁地址</Trans>,
-        dataIndex: 'address',
-        key: 'address',
+        dataIndex: 'detail',
+        key: 'detail',
         render: (text) => <Text data={text} />
       },
       {
         title: <Trans>频次</Trans>,
-        dataIndex: 'count',
-        key: 'count',
+        dataIndex: 'freq',
+        key: 'freq',
       },
       {
         title: <Trans>Operation</Trans>,
@@ -104,11 +104,12 @@ class List extends PureComponent {
       <TableFinder
         {...tableProps}
         pagination={{
-          ...tableProps.pagination,
+          ...tableProps.pagination, 
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
         className={styles.table}
         columns={columns}
+        onChange={onChange}
       />
     )
   }

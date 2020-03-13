@@ -68,11 +68,11 @@ class Index extends PureComponent {
 
   get listProps() {
     const { dispatch, event, loading } = this.props
-    const { list, pagination, selectedRowKeys } = event
+    const { list=[], pagination, selectedRowKeys } = event.pageEvent
 
     return {
       dataSource: list,
-      loading: loading.effects['event/query'],
+      loading: loading.effects['event/pageEvent'],
       pagination,
       onChange: page => {
         this.handleRefresh({

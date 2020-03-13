@@ -5,7 +5,8 @@ import { pageModel } from 'utils/model'
 
 const {
   typeEvent,
-  queryUserList,
+  pageEvent,
+  // queryUserList,
   createUser,
   removeUser,
   updateUser,
@@ -17,6 +18,9 @@ export default modelExtend(pageModel, {
 
   state: {
     typeEvent: {
+      list: [],
+    },
+    pageEvent:{
       list: [],
     },
     currentItem: {},
@@ -31,10 +35,11 @@ export default modelExtend(pageModel, {
         if (pathMatchRegexp('/event', location.pathname)) {
           const payload = location.query || { page: 1, pageSize: 10 }
           dispatch({
-            type: 'query',
+            type: 'pageEvent',
             payload,
           })
           dispatch({ type: 'typeEvent' })
+          
         }
       })
     },
@@ -53,17 +58,18 @@ export default modelExtend(pageModel, {
         })
       }
     },
-    *query({ payload = {} }, { call, put }) {
-      const data = yield call(queryUserList, payload)
+    *pageEvent({ payload = {} }, { call, put }) {
+      const data = yield call(pageEvent, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
           payload: {
+            $$type: 'pageEvent',
             list: data.data,
             pagination: {
-              current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 10,
-              total: data.total,
+              current: Number(data.currentPage) || 1,
+              pageSize: Number(data.pageSize) || 10,
+              total: data.count,
             },
           },
         })
@@ -123,5 +129,5 @@ export default modelExtend(pageModel, {
     hideModal(state) {
       return { ...state, modalVisible: false }
     },
-  },
+  }, 
 })
