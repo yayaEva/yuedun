@@ -3,7 +3,7 @@ import api from 'api'
 import store from 'store'
 import moment from 'moment'
 
-const { loginUser } = api
+const { login } = api
 
 export default {
   namespace: 'login',
@@ -12,8 +12,8 @@ export default {
 
   effects: {
     *login({ payload }, { put, call, select }) {
-      // const data = yield call(loginUser, payload)
-      const data = {success: true, data: { username: 'Eva' } }
+       const data = yield call(login, payload)
+      // const data = {success: true, data: { username: 'Eva' } }
       const { locationQuery } = yield select(_ => _.app)
 
       if (data.success) {

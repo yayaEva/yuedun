@@ -11,6 +11,7 @@ const {
   srcipEvent,
   dstipEvent,
   listEvent,
+  delEvent,
 } = api
 
 export default modelExtend(pageModel, {
@@ -139,6 +140,21 @@ export default modelExtend(pageModel, {
             target: data.data.slice(0, 5),
           },
         })
+      }
+    },
+    
+    *delete({ payload }, { call, put, select }) {
+      const data = yield call(delEvent, { id: payload })
+      // const { selectedRowKeys } = yield select(_ => _.dashboard)
+      if (data.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            // selectedRowKeys: selectedRowKeys.filter(_ => _ !== payload),
+          },
+        })
+      } else {
+        throw data
       }
     },
   },

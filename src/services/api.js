@@ -27,4 +27,7 @@ export default {
   listEvent: '/listEvent', // 最新事件
   queryBytime:'/queryBytime',//全屏监控list
   pageEvent:'/pageEvent',//事件日志
+
+  login:'/login',//登录
+  delEvent:'/delEvent'//忽略
 }

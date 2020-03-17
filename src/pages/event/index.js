@@ -90,6 +90,7 @@ class Index extends PureComponent {
               list.length === 1 && pagination.current > 1
                 ? pagination.current - 1
                 : pagination.current,
+                pageSize: pagination.pageSize,
           })
         })
       },

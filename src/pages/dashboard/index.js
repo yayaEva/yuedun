@@ -68,6 +68,7 @@ function sum(arr = []) {
   loading,
 }))
 class Dashboard extends PureComponent {
+
   get cardListProps() {
     const { dispatch, dashboard, loading } = this.props
     const sourceSum = sum(dashboard.srcipEvent.list)
@@ -96,7 +97,15 @@ class Dashboard extends PureComponent {
     return {
       dataSource: list,
       loading: loading.effects['dashboard/listEvent'],
-      onDeleteItem: id => {},
+      // onDeleteItem: id => {},
+      onDeleteItem: id => {
+        dispatch({
+          type: 'dashboard/delete',
+          payload: id,
+        }).then(() => {
+          location.reload() 
+        })
+      },
       onEditItem(item) {},
       onViewItem(item) {
         dispatch({

@@ -6,9 +6,10 @@ import { pageModel } from 'utils/model'
 const {
   typeEvent,
   pageEvent,
+  delEvent,
   // queryUserList,
   createUser,
-  removeUser,
+  // removeUser,
   updateUser,
   removeUserList,
 } = api
@@ -39,7 +40,7 @@ export default modelExtend(pageModel, {
             payload,
           })
           dispatch({ type: 'typeEvent' })
-          
+          dispatch({ type: 'delete' })
         }
       })
     },
@@ -77,8 +78,8 @@ export default modelExtend(pageModel, {
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeUser, { id: payload })
-      const { selectedRowKeys } = yield select(_ => _.user)
+      const data = yield call(delEvent, { id: payload })
+      const { selectedRowKeys } = yield select(_ => _.event)
       if (data.success) {
         yield put({
           type: 'updateState',

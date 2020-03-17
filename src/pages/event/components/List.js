@@ -81,6 +81,14 @@ class List extends PureComponent {
           const onClick = (key) => {
             if (key === 'view') {
               onViewItem(record)
+            }else{
+              // onDeleteItem(record.id)
+              confirm({
+                title: i18n.t`您确定要忽略这条记录吗?`,
+                onOk() {
+                  onDeleteItem(record.id)
+                },
+              })
             }
           }
           return <Operation data={['view', 'ignore']} onClick={onClick} />
