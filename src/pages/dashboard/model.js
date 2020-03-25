@@ -12,6 +12,7 @@ const {
   dstipEvent,
   listEvent,
   delEvent,
+  safetyTrend,
 } = api
 
 export default modelExtend(pageModel, {
@@ -37,6 +38,9 @@ export default modelExtend(pageModel, {
     listEvent: {
       list: [],
     },
+    safetyTrend:{
+      list:[],
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -52,6 +56,7 @@ export default modelExtend(pageModel, {
           dispatch({ type: 'srcipEvent' })
           dispatch({ type: 'dstipEvent' })
           dispatch({ type: 'listEvent' })
+          dispatch({ type: 'safetyTrend' })
         }
       })
     },
@@ -117,6 +122,19 @@ export default modelExtend(pageModel, {
         })
       }
     },
+    *safetyTrend({ payload = {} }, { call, put }) {
+      const data = yield call(safetyTrend, payload)
+      if (data) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            $$type: 'safetyTrend',
+            list: data.data,
+          },
+        })
+      }
+    },
+
     *queryEvents({ payload = {} }, { call, put }) {
       const data = yield call(queryUserList, payload)
       if (data) {

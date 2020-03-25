@@ -97,13 +97,13 @@ class CardList extends PureComponent {
     return (
       <Spin spinning={this.props.loading}>
         <Row gutter={10}>
-          <Col xl={8} md={6} sm={12}>
+          {/* <Col xl={8} md={6} sm={12}>
             <Card style={{ marginBottom: 30 }} bodyStyle={{ padding: 0 }}>
               <div className={styles.title} style={{ position: 'absolute', marginTop: 24, marginLeft: 20, borderWidth: 0 }}>最高流量<span className={styles.text}>TOP5</span></div>
               <ReactEcharts ref="histogram" option={histogram} className={styles.echarts} />
             </Card>
-          </Col>
-          <Col xl={16} md={18} sm={12}>
+          </Col> */}
+          <Col xl={24} md={18} sm={12}>
             <Card style={{ marginBottom: 30 }} bodyStyle={{ padding: '24px 0' }}>
               <div className={styles.wrap}>
                 <div className={styles.item}>

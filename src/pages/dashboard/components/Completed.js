@@ -134,14 +134,14 @@ function Completed({ data, onClick, inactive }) {
           </defs>
           <Area
             type="monotone"
-            dataKey="漏洞利用"
+            dataKey="事件数"
             stroke={'#5f93b0'}
             fill={'url(#color1)'}
             fillOpacity={1}
             strokeWidth={0}
             dot={false}
           />
-          <Area
+          {/* <Area
             type="monotone"
             dataKey="DDOS攻击"
             stroke={'#b7ebe2'}
@@ -149,7 +149,7 @@ function Completed({ data, onClick, inactive }) {
             fillOpacity={1}
             strokeWidth={0}
             dot={false}
-          />
+          /> */}
         </AreaChart>
       </ResponsiveContainer>
     </div>

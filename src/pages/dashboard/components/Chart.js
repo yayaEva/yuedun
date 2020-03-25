@@ -204,9 +204,9 @@ class Filter extends Component {
     this.state = {
       inactive: [],
       threat_type: getOptions(props.data.threat_type),
+      safety_Trend: props.data.safety_Trend,
     }
   }
-
   handleFields = fields => {
     const { createTime } = fields
     if (createTime.length) {
@@ -227,7 +227,7 @@ class Filter extends Component {
     fields = this.handleFields(fields)
     onFilterChange(fields)
   }
-
+  
   componentDidMount() {
     this.instance = this.refs['threat_type']['getEchartsInstance']()
     this.index = 0
@@ -268,7 +268,12 @@ class Filter extends Component {
       return {
         threat_type: getOptions(props.data.threat_type),
       }
-    }
+    }  
+    if (state.safety_Trend !== props.data.safety_Trend) {
+      return {
+        safety_Trend: getOptions(props.data.safety_Trend),
+      }
+    }  
     return null
   }
 
@@ -295,6 +300,8 @@ class Filter extends Component {
     this.setState({ inactive })
   }
 
+
+
   render() {
     const { data, form, i18n } = this.props
     const { getFieldDecorator } = form
@@ -306,13 +313,12 @@ class Filter extends Component {
       color: '#4d4d4d',
       fontWeight: 'normal',
     }
-
     return (
       <Row gutter={24} style={{ marginBottom: 30 }}>
         <Col lg={16} md={14}>
           <Card bodyStyle={bodyStyle} title={<div style={titleStyle}>{i18n.t`安全趋势`} <RangePicker className={styles.date} allowClear format="YYYY-MM-DD" onChange={this.handleChange.bind(this, 'createTime')} /></div>}>
             {/*<ReactEcharts ref="create_day" option={create_day} />*/}
-            <Completed data={completed} onClick={this.onClick} inactive={this.state.inactive} />
+            <Completed data={this.state.safety_Trend} onClick={this.onClick} inactive={this.state.inactive} />
           </Card>
         </Col>
         <Col lg={8} md={10}>

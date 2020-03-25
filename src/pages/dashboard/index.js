@@ -124,9 +124,12 @@ class Dashboard extends PureComponent {
     const { list = [] } = dashboard.typeEvent
     const threat_type = list.map((v) => ({ value: v.num, name: v.eventtype }))
 
+    const safety_Trend = dashboard.safetyTrend.list.map((v) => ({ name:v.day, '事件数': v.num }))
+
     return {
       data: {
         threat_type, // 威胁类型
+        safety_Trend,//安全趋势
       },
       onFilterChange: value => {
         console.log('onFilterChange', value)

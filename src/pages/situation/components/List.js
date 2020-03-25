@@ -60,7 +60,7 @@ class List extends PureComponent {
         key: 'eventtype',
         width: 'auto',
         render: (text, record, index) => renderEl(
-          <div style={{ cursor: 'pointer' }} onClick={() => onEditItem(record)}>{text} <Icon type="eye" /></div>,
+          <div style={{ cursor: 'pointer'}} onClick={() => onEditItem(record)}>{text} <Icon type="eye" style={{float:'right',marginRight:'25px'}}/></div>,
           record,
           index
         ),

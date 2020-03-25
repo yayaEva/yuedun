@@ -3,12 +3,16 @@ import PropTypes from 'prop-types'
 import { router } from 'utils'
 import { connect } from 'dva'
 import { message } from 'antd'
-import { withI18n } from '@lingui/react'
-import { Page, Button } from 'components'
+import { withI18n,Trans} from '@lingui/react'
+import { Page, Button ,Text,Operation} from 'components'
 import { stringify } from 'qs'
+// import { Button, Operation, Text } from 'components'
+// import { Trans, withI18n } from '@lingui/react'
 import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
+import exportExcel from './exportExcel'
+
 
 @withI18n()
 @connect(({ event, loading }) => ({ event, loading }))
@@ -105,7 +109,7 @@ class Index extends PureComponent {
       },
       onViewItem(item) {},
       rowSelection: {
-        selectedRowKeys,
+        // selectedRowKeys,
         onChange: keys => {
           dispatch({
             type: 'event/updateState',
@@ -148,7 +152,8 @@ class Index extends PureComponent {
         <Filter {...this.filterProps} />
         <div style={{ marginBottom: 20, padding: 4, borderBottom: '1px solid #e6e6e6' }}>
           <Button type="primary" size="small" className="margin-right" onClick={() => this.handleItems('0')}>批量导出</Button>
-          <Button type="primary" size="small" onClick={() => this.handleItems('1')}>全部导出</Button>
+          {/* <Button type="primary" size="small" onClick={() => this.handleItems('1')}>全部导出</Button> */}
+          <Button type="primary" size="small" onClick={() => exportExcel(columns,this.listProps.dataSource)}>全部导出</Button>
         </div>
         <List {...this.listProps} />
         <Modal {...this.modalProps} />

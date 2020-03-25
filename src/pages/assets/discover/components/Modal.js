@@ -2,12 +2,150 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Trans, withI18n } from '@lingui/react'
 import { Button, Modal } from 'components'
-import { Row, Col } from 'antd'
+import {Form,Input,Icon, Row, Col } from 'antd'
 
+
+const FormItem = Form.Item
+
+const formItemLayout = {
+  labelCol: {
+    span: 6,
+  },
+  wrapperCol: {
+    span: 14,
+  },
+}
 @withI18n()
+@Form.create()
 class UserModal extends PureComponent {
+  handleOk = () => {
+    const { item = {}, onOk, form } = this.props
+    const { validateFields, getFieldsValue } = form
+
+    validateFields(errors => {
+      if (errors) {
+        return
+      }
+      const data = {
+        ...getFieldsValue(),
+        key: item.key,
+      }
+      onOk(data)
+    })
+  }
+
   render() {
-    const { item = {}, onOk, i18n, ...modalProps } = this.props
+    const { item = {}, modalType, onOk,form, i18n, ...modalProps } = this.props
+    const { getFieldDecorator } = form
+
+    if (modalType === 'create') {
+      return(
+        <Modal {...modalProps} onOk={this.handleOk}>
+          <Form layout="horizontal">
+            <FormItem label={i18n.t`资产名称`} {...formItemLayout}>
+              {getFieldDecorator('name', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`域名个数`} {...formItemLayout}>
+              {getFieldDecorator('domain_Num', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`IP`} {...formItemLayout}>
+              {getFieldDecorator('IP', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`域名`} {...formItemLayout}>
+              {getFieldDecorator('domain', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`物理位置`} {...formItemLayout}>
+              {getFieldDecorator('position', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`发现时间`} {...formItemLayout}>
+              {getFieldDecorator('time', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`资产组`} {...formItemLayout}>
+              {getFieldDecorator('group', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`网站分类`} {...formItemLayout}>
+              {getFieldDecorator('class', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`是否已治理`} {...formItemLayout}>
+              {getFieldDecorator('govern', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+            <FormItem label={i18n.t`外网`} {...formItemLayout}>
+              {getFieldDecorator('internet', {
+                initialValue: item.name,
+                rules: [
+                  {
+                    required: true,
+                  },
+                ],
+              })(<Input allowClear placeholder={i18n.t`请输入`} />)}
+            </FormItem>
+          </Form>
+        </Modal>
+      )
+    }
 
     return (
       <Modal {...modalProps} onOk={onOk}>

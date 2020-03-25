@@ -24,7 +24,8 @@
     "react-perfect-scrollbar": "^1.5.0",
     "react-wow": "^1.0.0",
     "recharts": "^1.7.1",
-    "store": "^2.0.0"
+    "store": "^2.0.0",
+    "xlsx": "^0.15.6"
   },
   "devDependencies": {
     "@babel/node": "^7.6.2",

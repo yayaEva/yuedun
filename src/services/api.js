@@ -26,8 +26,16 @@ export default {
   dstipEvent: '/dstipEvent', // 事件目标地址TOP5
   listEvent: '/listEvent', // 最新事件
   queryBytime:'/queryBytime',//全屏监控list
+  
   pageEvent:'/pageEvent',//事件日志
+  safetyTrend:'/safetyTrend',//安全趋势
+  listEvent2: '/listEvent2', // 最新事件
 
   login:'/login',//登录
-  delEvent:'/delEvent'//忽略
+  delEvent:'/delEvent',//忽略
+
+  //资产
+  //资产发现
+  pageDiscover:'/pageAssetDiscover',
+  delDiscover:'/delAssetDiscover',
 }

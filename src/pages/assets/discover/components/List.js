@@ -25,33 +25,33 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, onViewItem, i18n, ...tableProps } = this.props
+    const { onDeleteItem, onEditItem, onViewItem,onChange, i18n, ...tableProps } = this.props
 
     const columns = [
       {
         title: <Trans>名称</Trans>,
-        dataIndex: 'eventName',
-        key: 'eventName',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: <Trans>IP</Trans>,
-        dataIndex: 'sourceIp',
-        key: 'sourceIp',
+        dataIndex: 'ip',
+        key: 'ip',
       },
       {
         title: <Trans>URL</Trans>,
-        dataIndex: 'url',
-        key: 'url',
+        dataIndex: 'host',
+        key: 'host',
       },
       {
         title: <Trans>治理</Trans>,
-        dataIndex: 'isUsed',
-        key: 'isUsed',
+        dataIndex: 'port',
+        key: 'port',
       },
       {
         title: <Trans>资产组</Trans>,
-        dataIndex: 'group',
-        key: 'group',
+        dataIndex: 'id',
+        key: 'id',
       },
       {
         title: <Trans>Operation</Trans>,
@@ -90,6 +90,7 @@ class List extends PureComponent {
         }}
         className={styles.table}
         columns={columns}
+        onChange={onChange}
       />
     )
   }

@@ -4,9 +4,11 @@ import api from 'api'
 import { pageModel } from 'utils/model'
 
 const {
-  queryUserList,
+  pageDiscover,
+  delDiscover,
+  // queryUserList,
   createUser,
-  removeUser,
+  // removeUser,
   updateUser,
   removeUserList,
 } = api
@@ -19,6 +21,9 @@ export default modelExtend(pageModel, {
     modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
+    query:{
+      list: [],
+    },
   },
 
   subscriptions: {
@@ -37,16 +42,17 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const data = yield call(queryUserList, payload)
+      const data = yield call(pageDiscover, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
           payload: {
+            $$type: 'query',
             list: data.data,
             pagination: {
               current: Number(payload.page) || 1,
               pageSize: Number(payload.pageSize) || 10,
-              total: data.total,
+              total: data.count,
             },
           },
         })
@@ -54,8 +60,8 @@ export default modelExtend(pageModel, {
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeUser, { id: payload })
-      const { selectedRowKeys } = yield select(_ => _.user)
+      const data = yield call(delDiscover, { id: payload })
+      const { selectedRowKeys } = yield select(_ => _.assetsDiscover)
       if (data.success) {
         yield put({
           type: 'updateState',

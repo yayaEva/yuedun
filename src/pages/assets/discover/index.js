@@ -36,15 +36,14 @@ class Index extends PureComponent {
       message.warn('请选择数据')
       return
     }
-
-    // if (key === '1') {
-    //   dispatch({
-    //     type: 'assetsDiscover/showModal',
-    //     payload: {
-    //       modalType: 'create',
-    //     },
-    //   })
-    // }
+    if (key === '1') {
+      dispatch({
+        type: 'assetsDiscover/showModal',
+        payload: {
+          modalType: 'create',
+        },
+      })
+    }
   }
 
   get modalProps() {
@@ -52,6 +51,7 @@ class Index extends PureComponent {
     const { currentItem, modalVisible, modalType } = assetsDiscover
 
     return {
+      modalType:modalType,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       confirmLoading: loading.effects[`assetsDiscover/${modalType}`],
@@ -84,7 +84,7 @@ class Index extends PureComponent {
 
   get listProps() {
     const { dispatch, assetsDiscover, loading } = this.props
-    const { list, pagination, selectedRowKeys } = assetsDiscover
+    const { list=[], pagination, selectedRowKeys } = assetsDiscover.query
 
     return {
       dataSource: list,
@@ -106,6 +106,7 @@ class Index extends PureComponent {
               list.length === 1 && pagination.current > 1
                 ? pagination.current - 1
                 : pagination.current,
+            pageSize: pagination.pageSize,
           })
         })
       },
@@ -128,7 +129,7 @@ class Index extends PureComponent {
         })
       },
       rowSelection: {
-        selectedRowKeys,
+        // selectedRowKeys,
         onChange: keys => {
           dispatch({
             type: 'assetsDiscover/updateState',
